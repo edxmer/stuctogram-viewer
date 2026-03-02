@@ -47,7 +47,6 @@ def update() -> None:
 
     def on_load():
         nonlocal zoom_amount
-        print("LOADED")
         if scroll_y is not None:
             window.evaluate_js(f'window.scrollTo(0, {scroll_y})')
         if zoom_amount is not None:
@@ -77,7 +76,7 @@ def main(_):
 
 if __name__ == '__main__':
     with open(html_file_path, "w", encoding="utf-8") as f:
-        f.write("Loading...")
+        f.write("loading...")
     if 2 <= len(argv):
         stuki_path = Path(argv[1])
 

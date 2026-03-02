@@ -1,0 +1,8 @@
+caption Demo():void
+
+§* BOLD *§
+§# italic #§
+§_ underline _§
+you can also add extra §s §s  spaces
+§t §t or §t §t tabs
+line §n break
