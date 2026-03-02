@@ -38,16 +38,6 @@ hello
 Basically anything that is not something else
 
 ---
-### multiline statement
-```
-[
-    x:="hello
-    there"
-]
-```
-<img src="media/spec-1-2.png" alt="generated structogram" width="400"/><br>
-
----
 ### if-else
 ```
 if <condition>
