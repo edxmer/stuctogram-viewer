@@ -2,3 +2,5 @@ stukis/*
 !stukis/demo/
 
 __pycache__/
+
+html/index.html
