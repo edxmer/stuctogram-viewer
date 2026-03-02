@@ -1,0 +1,55 @@
+caption DemoAlgorithm():void
+
+/*
+    This is a demonstration of all functionalities
+    supported by the structogram viewer.
+*/
+
+// Statements
+x: int = 10
+y: int = 20
+
+// Text formatting for statements §n line breaks §n and multiline statements
+[
+    §* BOLD *§
+    §# italic #§
+    §_ underline _§
+    you can also add extra  §s §s  spaces
+    §t §t or §t §t tabs
+]
+/*
+    Multiline
+    comments
+*/
+
+// If-Else structure
+if x > y
+    result := "x is greater" §( you can also add inline comments )§
+else
+    result := "y is less or equal"
+end
+
+// Pre-test loop
+while x > 0
+    // Decrement x in each iteration
+    x := x - 1
+end
+
+// Post-test loop
+do
+    // Increment y in each iteration
+    y := y + 1
+while y < 25
+
+// Switch-Case structure
+switch
+    case x == 0
+        result := "x is zero"
+    case x > 0
+        result := "x is positive"
+    case default
+        result := "x is negative"
+end
+
+// Return statement
+return result

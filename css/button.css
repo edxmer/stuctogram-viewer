@@ -1,0 +1,47 @@
+.btn-macchiato {
+    background-color: #1e2030; /* Macchiato Blue */
+    color: #a5adcb;            /* Macchiato Base (Dark text for contrast) */
+    border: none;
+    
+    /* Typography */
+    font-size: 12px;
+    font-weight: 500;
+    
+    /* Shape & Spacing */
+    padding: 5px 12px;
+    border-radius: 5px;        /* Soft, modern rounded corners */
+    cursor: pointer;
+    
+    /* Smooth animations */
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+.btn-macchiato:hover {
+    background-color: #363a4f; /* Lighter Macchiato Lavender on hover */
+    color: #cad3f5;
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Click/Active effect */
+.btn-macchiato:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Focus ring for accessibility */
+.btn-macchiato:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px #24273a, 0 0 0 5px #8aadf4;
+}
+
+/* Hide the button on the actual PDF */
+/* --- PRINT SPECIFIC STYLES --- */
+@media print {
+
+    /* 2. Hide the Save as PDF button completely */
+    .btn-macchiato {
+        display: none !important;
+    }
+}

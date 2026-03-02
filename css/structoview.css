@@ -1,0 +1,372 @@
+/*
+The original file was modified.
+*/
+
+/*
+Copyright 2021-2022 Jens Hofschröer <structogramview@nigjo.de>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+@font-face {
+    font-family: 'JetbrainsMono';
+    src: url('../fonts/JetBrainsMono-Regular.ttf'); /*URL to font*/
+}
+
+:root{
+  --structoview-then:'true';
+  --structoview-else:'false';
+  --structoview-exit:'exit';
+  
+  --structoview-text:black;
+  --structoview-line:black;
+  --structoview-hint:gray;
+  --structoview-comment:var(--structoview-hint);
+}
+@media screen {
+:root{
+  --structoview-border:lightblue;
+  --structoview-bg:white;
+  --structoview-bg-block:lightgray;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --structoview-text:Gainsboro;
+    --structoview-border:navy;
+    --structoview-line:gray;
+    --structoview-hint:gray;
+    --structoview-comment:var(--structoview-hint);
+    --structoview-bg:black;
+    --structoview-bg-block:#303030;
+  }
+  
+}  
+.structoview-light, .structoview-light *{
+  --structoview-text:#181926;
+  --structoview-border:rgb(244, 219, 214);
+  --structoview-line:#181926;
+  --structoview-hint:gray;
+  --structoview-comment:var(--structoview-hint);
+  --structoview-bg:white;
+  --structoview-bg-block:lightgray;
+}
+.structoview-dark, .structoview-dark *{
+
+  --structoview-text:#cad3f5;
+  --structoview-border:#181926;
+  --structoview-line:#494d64;
+  /*--structoview-hint:#939ab7;*/
+  --structoview-hint:#cad3f5;
+  /*--structoview-comment:var(--structoview-hint);*/
+  --structoview-comment:#939ab7;;
+  --structoview-bg:#1e2030;
+  --structoview-bg-block:#181926;
+}
+}
+:lang(en){
+  --structoview-then:'T';
+  --structoview-else:'F';
+  --structoview-exit:'exit';
+}
+struct-diagram:before{
+  position:relative;
+  display: block;
+  content:attr(caption);
+  font-weight: bold;
+  font-size: 1.25em;
+  line-height: 1.5em;
+  padding-left: .25em;
+}
+struct-sequence,struct-block,struct-loop,struct-iteration,struct-repeat,struct-call,struct-break,struct-comment{
+  display:block;
+  box-sizing: border-box;
+}
+struct-concurrent>*,struct-decision>struct-block,struct-select>struct-case,struct-select>struct-block{
+  display: table-cell;
+  background-color:var(--structoview-bg-block);
+  vertical-align: top;
+}
+struct-repeat,struct-concurrent,struct-sequence,struct-decision,struct-select,struct-loop,struct-iteration,struct-call,struct-break,struct-comment{
+  padding:.25em;
+  background-color:var(--structoview-bg);
+  border-top:1px solid var(--structoview-line);
+  border-left:1px solid var(--structoview-line);
+}
+struct-decision,struct-select,struct-concurrent{
+  display:table;
+  width:100%;
+  box-sizing: border-box;
+  padding:0px;
+  padding-top:2.25em;
+  position:relative;
+}
+struct-concurrent{
+  padding-bottom:2.25em;
+}
+struct-decision:after,struct-select:after{
+  text-align:center;
+}
+struct-decision:after,struct-select:after{
+  display:table-caption;
+  content: attr(condition);
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  text-shadow: 1px 1px var(--structoview-bg), 
+    -1px 1px var(--structoview-bg),
+    -1px -1px var(--structoview-bg),
+    1px -1px var(--structoview-bg);
+  z-index:10;
+}
+struct-decision>struct-block, struct-select>*{
+  position: relative;
+  vertical-align: top;
+}
+struct-decision>struct-block:after,
+struct-select>struct-case:after,
+struct-select>struct-block:after{
+  position: absolute;
+  top:-1.5em;
+  left:0.5em;
+  min-width: 20em;
+  /*font-style: italic;*/
+  white-space: nowrap;
+  font-size: .75em;
+  color:var(--structoview-hint);
+}
+struct-decision>struct-block:last-child:after{
+  content:var(--structoview-else);
+  left: auto;
+  right: .25em;
+  min-width: 0;
+  width: auto;
+  text-align: right;
+  white-space: nowrap;
+}
+struct-decision>struct-block:first-child:after{
+  content:var(--structoview-then);
+  left: .25em;
+}
+struct-iteration:before,struct-repeat:before{
+  content:attr(condition);
+  display:block;
+  height:0px;
+  position:relative;
+  top:-1.75em;
+  left:-1em;
+}
+struct-iteration,struct-loop,struct-repeat{
+  padding:0px;
+  padding-left:1.5em;
+}
+struct-iteration,struct-repeat{
+  padding-top:2em;
+}
+struct-loop,struct-repeat{
+  padding-bottom:2em;
+}
+struct-loop:after{
+  display:block;
+  content:attr(condition);
+  height:0px;
+  position:relative;
+  bottom:-.25em;
+  left:-1em;
+}
+struct-comment{
+  white-space: pre-line;
+  font-style:italic;
+  color:var(--structoview-comment);
+}
+struct-diagram{
+  color:var(--structoview-text);
+  font-family: 'JetbrainsMono';
+  display: inline-block;
+  min-width: 20em;
+  line-height: 1.5em;
+  padding:.5em;
+  background-color: var(--structoview-border);
+}
+struct-diagram>*{
+  border-right:1px solid var(--structoview-line);
+}
+struct-diagram>*:last-child{
+  border-bottom:1px solid var(--structoview-line);
+}
+struct-select>struct-case:not(:first-child){
+  border-left: 1px solid var(--structoview-line);
+}
+struct-block>struct-sequence{
+  min-width:3em;
+}
+struct-block>struct-sequence:empty:after{
+  content: ' ';
+}
+struct-decision>struct-block>*,
+struct-select>struct-case>*,
+struct-select>struct-block>*{
+  border-left:none;
+}
+struct-decision>struct-block:first-child:before,
+struct-select>struct-case:first-of-type:before{
+  background-image:linear-gradient(to top right, transparent calc(50% - 1px), var(--structoview-line), transparent calc(50% + 1px) );
+}
+struct-decision>struct-block:last-child:before,
+struct-select>struct-block:before{
+  background-image:linear-gradient(to bottom right, transparent calc(50% - 1px), var(--structoview-line), transparent calc(50% + 1px) );
+}
+struct-select>struct-case:after{
+  content: attr(condition);
+}
+struct-decision>struct-block:before,
+struct-select>struct-case:before,
+struct-select>struct-block:before {
+  content:'';
+  position:absolute;
+  top:-2.25em;
+  width:100%;
+  height:2.25em;
+  box-sizing: border-box;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index:0;
+}
+
+struct-block:not(:first-child){
+  border-left:1px solid var(--structoview-line);
+}
+struct-concurrent>struct-block>*:last-child,
+struct-decision>struct-block>*:last-child,
+struct-repeat>struct-block>*:last-child,
+struct-loop>struct-block>*:last-child,
+struct-select>*>*:last-child{
+  border-bottom: 1px solid var(--structoview-line);
+}
+struct-loop>struct-block>*:first-child{
+  border-top:none;
+}
+struct-break:empty:before{
+  content:' ';
+  position: relative;
+}
+struct-break[exit="true"]:before{
+  content: var(--structoview-exit) ' ';
+  position: relative;
+}
+struct-break{
+  padding-left:1.5em;
+  position:relative;
+}
+struct-break:after{
+  content:'';
+  position:absolute;
+  border:1px solid;
+  border-color: var(--structoview-line);
+  border-top-color:transparent;
+  border-right-color:transparent;
+  transform:rotate(45deg);
+  height:1.4em;
+  width:1.4em;
+  top:.25em;
+  left:.28em;
+}
+struct-concurrent:before,struct-concurrent:after,
+struct-concurrent>*:first-child:before,
+struct-concurrent>*:last-child:after
+{
+  position:absolute;
+  content:'';
+  border-top:1px solid var(--structoview-line);
+  width:3.2em;
+  transform-origin: top left;
+}
+struct-concurrent:before{
+  transform: rotate(-45deg);
+}
+struct-concurrent:after{
+  top:0;
+  right:-.91em;
+  transform: rotate(45deg);
+}
+struct-concurrent>*:first-child:before{
+  transform: rotate(45deg);
+  bottom:-1px;
+  left: 0;
+}
+struct-concurrent>*:last-child:after{
+  transform: rotate(-45deg);
+  right:0;
+  transform-origin: top right;
+  bottom: -2px;
+}
+struct-concurrent{
+  overflow: hidden;
+}
+struct-concurrent>struct-block>*{
+  border-left: none !important;
+}
+struct-concurrent > *{
+  position: relative;
+  border-bottom:1px solid var(--structoview-line);
+}
+struct-diagram.compactselect struct-select{
+  display:flex;
+  flex-direction:column;
+  padding-left:1.5em;
+}
+struct-diagram.compactselect struct-select:after{
+  text-align: left;
+  left:.25em;
+}
+struct-diagram.compactselect struct-select>*:before{
+  background:none;
+}
+struct-diagram.compactselect struct-select>*:not(:first-child){
+  margin-top:1.5em;
+}
+struct-diagram.compactselect struct-select>*:first-child{
+  border-left:1px solid var(--structoview-line);
+}
+struct-diagram.compactselect struct-select>struct-block:after{
+  right: unset;
+}
+struct-call{
+  padding-left:1em;
+  padding-right:1em;
+  position:relative;
+  min-height:2em;
+}
+struct-call:after,struct-call:before{
+  display:block;
+  width:.5em;
+  height:100%;
+  content:'';
+  position:absolute;
+  top:0px;
+}
+struct-call:after{
+  right:0em;
+  border-left:1px solid var(--structoview-line);
+}
+struct-call:before{
+  left:0em;
+  border-right:1px solid var(--structoview-line);
+}
+
+
+/* Draw a top-left to bottom-right diagonal line for ALL cases */
+struct-select > struct-case:before {
+  background-image: linear-gradient(to top right, transparent calc(50% - 1px), var(--structoview-line), transparent calc(50% + 1px) );
+}

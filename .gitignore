@@ -1,0 +1,4 @@
+stukis/*
+!stukis/demo/
+
+__pycache__/

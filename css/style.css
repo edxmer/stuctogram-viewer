@@ -1,0 +1,122 @@
+/* Optional: Add some padding to the page so it looks nice */
+body { 
+    padding: 1rem;
+    background-color: #24273a; /* Macchiato Base */
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* --- UI CONTROLS --- */
+.ui-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1rem;
+    position: sticky;
+    top: 2rem;
+    z-index: 100;
+}
+
+/* --- SLIDER CONTAINER STYLES --- */
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #1e2030; /* Macchiato Mantle */
+    color: #a5adcb;            /* Macchiato Subtext0 */
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: box-shadow 0.2s ease;
+}
+
+.slider-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* --- SLIDER INPUT STYLES --- */
+.zoom-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 120px;
+    height: 14px; /* <-- Add this line to fix the macOS drag bug */
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Track */
+.zoom-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #363a4f; /* Macchiato Surface0 */
+    border-radius: 3px;
+}
+.zoom-slider::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #363a4f;
+    border-radius: 3px;
+}
+
+/* Thumb */
+.zoom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #8aadf4; /* Macchiato Blue */
+    margin-top: -4px; /* Centers the thumb vertically on the track */
+    transition: transform 0.1s ease;
+}
+.zoom-slider::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #8aadf4;
+    border: none;
+    transition: transform 0.1s ease;
+}
+
+/* Thumb Hover Effect */
+.zoom-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+}
+.zoom-slider::-moz-range-thumb:hover {
+    transform: scale(1.3);
+}
+
+/* Focus ring for accessibility */
+.zoom-slider:focus-visible {
+    outline: none;
+}
+.zoom-slider:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px #24273a, 0 0 0 5px #8aadf4;
+}
+
+/* --- MAIN & ZOOM CONTENT --- */
+main {
+    display: grid;
+    place-items: center;
+    /* Subtracted padding/controls to prevent double scrollbars */
+    min-height: calc(100vh - 6rem); 
+}
+
+#zoom-content {
+    transform-origin: center center;
+    transition: transform 0.1s ease-out;
+    /* Initialize scale */
+    transform: scale(1);
+}
+
+/* --- PRINT SPECIFIC STYLES --- */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    /* Reset transform for printing to ensure it fits the page natively */
+    #zoom-content {
+        transform: scale(1) !important;
+    }
+}

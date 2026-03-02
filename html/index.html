@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structogram viewer</title>
+    <link rel="stylesheet" href="../css/structoview.css">
+    <link rel="stylesheet" href="../css/button.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/structoview.js"></script>
+</head>
+<body class="structoview-dark">
+
+<div class="ui-controls no-print">
+    <button onclick="window.print()" class="btn-macchiato">Save as PDF</button>
+    
+    <div class="slider-container">
+        <label for="zoomSlider">Zoom</label>
+        <input type="range" id="zoomSlider" class="zoom-slider" min="0.4" max="1.5" step="0.05" value="1" oninput="updateZoom(this.value)">
+        <span id="zoomValue">100%</span>
+    </div>
+</div>
+
+<main>
+    <div id="zoom-content">
+        <struct-diagram caption="DemoAlgorithm():void">
+
+<struct-comment>This is a demonstration of all functionalities
+supported by the structogram viewer.</struct-comment>
+<struct-comment>Statements</struct-comment>
+<struct-sequence>x: int = 10</struct-sequence>
+<struct-sequence>y: int = 20</struct-sequence>
+<struct-comment>Text formatting for statements <br> line breaks <br> and multiline statements</struct-comment>
+<struct-sequence><b> BOLD </b> <br> <i> italic </i> <br> <u> underline </u> <br> you can also add extra  &nbsp &nbsp  spaces <br> &emsp; &emsp; or &emsp; &emsp; tabs</struct-sequence>
+<struct-comment>Multiline
+comments</struct-comment>
+<struct-comment>If-Else structure</struct-comment>
+<struct-decision condition="x &gt; y">
+<struct-block>
+<struct-sequence>result := "x is greater" <i style="color:#a5adcb; text-align: right;">&emsp; you can also add inline comments </i></struct-sequence>
+</struct-block>
+<struct-block>
+<struct-sequence>result := "y is less or equal"</struct-sequence>
+</struct-block>
+</struct-decision>
+<struct-comment>Pre-test loop</struct-comment>
+<struct-iteration condition="x &gt; 0">
+<struct-block>
+<struct-comment>Decrement x in each iteration</struct-comment>
+<struct-sequence>x := x - 1</struct-sequence>
+</struct-block>
+</struct-iteration>
+<struct-comment>Post-test loop</struct-comment>
+<struct-loop condition="y &lt; 25">
+<struct-block>
+<struct-comment>Increment y in each iteration</struct-comment>
+<struct-sequence>y := y + 1</struct-sequence>
+</struct-block>
+</struct-loop>
+<struct-comment>Switch-Case structure</struct-comment>
+<struct-select condition="">
+<struct-case condition="x == 0">
+<struct-block>
+<div style="height:0;overflow:hidden;visibility:hidden;font-size:0.75em;white-space:nowrap;padding:0 0.5em;">x == 0</div><struct-sequence>result := "x is zero"</struct-sequence>
+</struct-block>
+</struct-case>
+<struct-case condition="x &gt; 0">
+<struct-block>
+<div style="height:0;overflow:hidden;visibility:hidden;font-size:0.75em;white-space:nowrap;padding:0 0.5em;">x &gt; 0</div><struct-sequence>result := "x is positive"</struct-sequence>
+</struct-block>
+</struct-case>
+<struct-case condition="default">
+<struct-block>
+<div style="height:0;overflow:hidden;visibility:hidden;font-size:0.75em;white-space:nowrap;padding:0 0.5em;">default</div><struct-sequence>result := "x is negative"</struct-sequence>
+</struct-block>
+</struct-case>
+</struct-select>
+<struct-comment>Return statement</struct-comment>
+<struct-sequence><b>return</b> result</struct-sequence>
+</struct-diagram>
+    </div>
+</main>
+
+<script src="../js/zoom.js"> </script>
+
+</body>
+</html>
