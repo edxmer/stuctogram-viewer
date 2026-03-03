@@ -7,8 +7,13 @@
 
 
 ## Usage
+### Dependencies:
 ```sh
-.venv/bin/python main.py <path>
+python3 pip install pywebview
+```
+### Run project
+```sh
+python3 main.py (path-to-structogram)
 ```
 
 ## Pseudo-code specifications
